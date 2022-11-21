@@ -12,20 +12,22 @@ export function Select(props) {
         // console.log(response.data)
         setTags(response.data)
     }
-
+    
     useEffect(() => {
         fetchTag()
     }, [])
 
+    console.log(props.tagId)
+
     return (
-        <SelectPrimitive.Root defaultValue={props.tagName} value={props.tagName} onValueChange={props.setTagName}>
+        <SelectPrimitive.Root defaultValue={props.tagId !== 'None' ? props.tagId : 'None'} value={props.tagId} onValueChange={props.setTagId}>
             <SelectPrimitive.Trigger
-                aria-label="tags"
+                aria-label={props.tagId}
                 className='w-40 px-3 py-1 rounded flex items-center bg-gray-100 justify-between'
             >
                 <SelectPrimitive.Value>
                     <span className="text-sm text-gray-700">
-                        {props.tagName}
+                        {props.tagId !== 'None' ? tags.filter(tag => tag._id === props.tagId)[0].name : 'None'}
                     </span>
                 </SelectPrimitive.Value>
                 <SelectPrimitive.Icon>
@@ -54,7 +56,7 @@ export function Select(props) {
                             {tags.map(tag => (
                                 <SelectPrimitive.Item
                                     key={tag._id}
-                                    value={tag.name}
+                                    value={tag._id}
                                     className="relative flex items-center px-8 py-2 rounded-md text-sm text-gray-700 font-medium focus:bg-gray-100"
                                 >
                                     <SelectPrimitive.ItemText>

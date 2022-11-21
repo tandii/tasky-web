@@ -18,9 +18,22 @@ export function Home() {
         }
     }
 
+    async function handleTaskDelete(id) {
+        const response = confirm('Do you want to delete the task?')
+        
+        if(response) {
+            const index = tasks.findIndex(task => task._id === id)
+            const newTasks = tasks.slice()
+            newTasks.splice(index, 1)
+            setTasks(newTasks)
+
+            await api.delete(`/tasks/${id}`)
+        }
+    }
+
     useEffect(() => {
         fetchTasks()
-    }, [tasks])
+    }, [])
 
 
     return (
@@ -55,9 +68,9 @@ export function Home() {
                         + Task
                     </Link>
 
-                    <button className="bg-green-400 rounded px-2 py-1">
+                    <Link to='/tags' className="bg-green-400 rounded px-2 py-1">
                         + Tag
-                    </button>
+                    </Link>
                 </div>
             </div>
 
@@ -69,10 +82,11 @@ export function Home() {
                         id={task._id}
                         body={task.body}
                         day={task.day}
-                        time={task.time}
+                        hour={task.hour}
                         completed={task.completed}
                         favorite={task.favorite}
                         tag={task.tag}
+                        handleTaskDelete={handleTaskDelete}
                     />
                 ))
             }

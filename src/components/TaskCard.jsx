@@ -25,13 +25,15 @@ export function TaskCard(props) {
         })
     }
 
-    async function handleTaskDelete(id) {
-        const response = confirm('Do you want to delete the task?')
+    // async function handleTaskDelete(id) {
+    //     // const response = confirm('Do you want to delete the task?')
 
-        if(response) {
-            await api.delete(`/tasks/${id}`)
-        }
-    }
+    //     // if(response) {
+    //     //     await api.delete(`/tasks/${id}`)
+    //     // }
+
+    //     console.log(id)
+    // }
 
     return (
         <div className='flex items-center gap-10 ml-16 mb-10'>
@@ -60,7 +62,7 @@ export function TaskCard(props) {
                         <div className='flex items-center  gap-3'>
                             <div className='flex items-center gap-1 text-xs'>
                                 <Clock width={16} height={16} />
-                                {props.time}
+                                {props.hour}
                             </div>
 
                             {props.tag &&
@@ -90,7 +92,7 @@ export function TaskCard(props) {
             <div className='flex gap-10'>
                 <Pencil width={24} height={24} />
 
-                <button onClick={() => handleTaskDelete(props.id)}>
+                <button onClick={() => props.handleTaskDelete(props.id)}>
                     <Trash width={24} height={24} className='text-red-700' />
                 </button>
             </div>

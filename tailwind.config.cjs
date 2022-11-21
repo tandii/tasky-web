@@ -12,6 +12,7 @@ module.exports = {
 
       'green-700': '#31AFB4',
       'green-400': '#93D3D6',
+      'green-500': '#76BDC0',
 
       'red-700': '#FF3A2C',
 
